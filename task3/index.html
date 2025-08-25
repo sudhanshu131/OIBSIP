@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Temperature Converter</title>
+   <link rel="stylesheet" href="style.css">
+  <style>
+  
+  </style>
+</head>
+<body>
+  <div class="converter">
+    <h2>Temperature Converter</h2>
+    <input type="number" id="tempInput" placeholder="Enter temperature" required>
+    
+    <select id="unit">
+      <option value="C">Celsius (°C)</option>
+      <option value="F">Fahrenheit (°F)</option>
+      <option value="K">Kelvin (K)</option>
+    </select>
+    
+    <button onclick="convertTemp()">Convert</button>
+    
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    function convertTemp() {
+      let temp = document.getElementById("tempInput").value;
+      let unit = document.getElementById("unit").value;
+      let result = document.getElementById("result");
+
+      if (temp === "" || isNaN(temp)) {
+        result.innerHTML = "⚠️ Please enter a valid number.";
+        return;
+      }
+
+      temp = parseFloat(temp);
+      let output = "";
+
+      if (unit === "C") {
+        output = 
+          `${temp} °C = ${(temp * 9/5 + 32).toFixed(2)} °F <br>
+           ${temp} °C = ${(temp + 273.15).toFixed(2)} K`;
+      } 
+      else if (unit === "F") {
+        output = 
+          `${temp} °F = ${((temp - 32) * 5/9).toFixed(2)} °C <br>
+           ${temp} °F = ${(((temp - 32) * 5/9) + 273.15).toFixed(2)} K`;
+      } 
+      else if (unit === "K") {
+        output = 
+          `${temp} K = ${(temp - 273.15).toFixed(2)} °C <br>
+           ${temp} K = ${(((temp - 273.15) * 9/5) + 32).toFixed(2)} °F`;
+      }
+
+      result.innerHTML = output;
+    }
+  </script>
+</body>
+</html>
